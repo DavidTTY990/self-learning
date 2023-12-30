@@ -1,0 +1,161 @@
+/* css reset start */
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed, 
+figure, figcaption, footer, header, hgroup, 
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 100%;
+	font: inherit;
+	vertical-align: baseline;
+}
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure, 
+footer, header, hgroup, menu, nav, section {
+	display: block;
+}
+body {
+	line-height: 1;
+}
+ol, ul {
+	list-style: none;
+}
+blockquote, q {
+	quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+	content: '';
+	content: none;
+}
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+/* css reset end */
+
+.wrap {
+    height: 300px;
+    width: 500px;
+    margin: 0 auto;
+    margin-top: 5%;
+    background-color: lightgrey;
+}
+
+.practice-1-counter-container {
+    padding-top: 75px;
+}
+
+.counter-title {
+    font-size: 35px;
+    text-align: center;
+}
+
+.counter-container {
+    display: flex;
+    justify-content: center;
+    margin: 15px;
+}
+
+.plus, .counter, .minus {
+    margin: 10px;
+}
+
+.plus {
+    width: 80px;
+    font-size: 30px;
+    border: none;
+    border-radius: 20px;
+}
+
+.counter {
+    width: 80px;
+    font-size: 30px;
+    border-radius: 20px;
+    text-align: center;
+    background-color: lightgreen;
+}
+
+.minus {
+    width: 80px;
+    font-size: 30px;
+    border: none;
+    border-radius: 20px;
+}
+
+.reset-container {
+    text-align: center;
+}
+
+.reset-btn {
+    width: 80px;
+    font-size: 20px;
+    padding: 10px;
+    border: none;
+    border-radius: 20px;
+}
+
+.wrap2 {
+    width: 500px;
+    margin: 0 auto;
+    margin-top: 10%;
+    text-align: center;
+    background-color: lightgrey;
+}
+
+.practice-2-todolist-container {
+    
+}
+
+.todolist-title {
+    font-size: 35px;
+    text-align: center;
+}
+
+.input-container {
+    margin-top: 5%;
+}
+
+.input-container input {
+    height: 35px;
+    width: 300px;
+    
+}
+
+.input-container button {
+    /* font-size: 20px; */
+    height: 40px;
+    width: 50px;
+    /* padding: 0.2em; */
+}
+
+.taskslist li {
+    /* outline: 2px solid red; */
+    height: 50px;
+    width: 305px;
+    color: white;
+    background-color: grey;
+    margin-top: 10px;
+    margin-left: 14%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.todolist-footer {
+    display: flex;
+    justify-content: space-between;
+    width: 365px;
+    margin-top: 10%;
+    margin-left: 14%;
+}

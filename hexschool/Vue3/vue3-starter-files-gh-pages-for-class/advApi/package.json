@@ -1,0 +1,14 @@
+{
+  "name": "test-npm",
+  "version": "1.0.0",
+  "description": "npm-package-using-test",
+  "main": "zh_TW.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "David Tsai",
+  "license": "ISC",
+  "dependencies": {
+    "vue-axios": "^3.5.2"
+  }
+}

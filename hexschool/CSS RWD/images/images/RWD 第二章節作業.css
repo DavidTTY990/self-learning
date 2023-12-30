@@ -1,0 +1,173 @@
+/* css reset start */
+/* http://meyerweb.com/eric/tools/css/reset/ 
+   v2.0 | 20110126
+   License: none (public domain)
+*/
+
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed, 
+figure, figcaption, footer, header, hgroup, 
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 100%;
+	font: inherit;
+	vertical-align: baseline;
+}
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure, 
+footer, header, hgroup, menu, nav, section {
+	display: block;
+}
+body {
+	line-height: 1;
+}
+ol, ul {
+	list-style: none;
+}
+blockquote, q {
+	quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+	content: '';
+	content: none;
+}
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+/* css reset end */
+.wrap {
+    max-width: 2000px;
+    margin: 0 auto;
+}
+
+/* navbar start */
+.nav-bar-list {
+    background-color: #F5F5F5;
+    padding-top: 2px;
+    padding-bottom: 2px;
+}
+
+.nav-bar-list ul {
+    display: flex;
+    justify-content: end;
+}
+
+.nav-bar-list ul li {
+    margin: 10px 25px 10px 10px;
+}
+
+.nav-bar-list ul li img {
+    margin-right: 4px;
+}
+
+.fbPageText {
+    color: #415E9A;
+}
+
+.twitterPageText {
+    color: #009FE7
+}
+
+/* navbar end */
+
+/* header start */
+.header {
+    max-width: 2000px;
+    height: 60px;
+    box-shadow: 0px 20px 30px lightgrey;
+}
+
+.hexschoolLogo {
+    height: 50px;
+    margin-top: 5px;
+    margin-left: 20px;
+    position: absolute;
+}
+
+.header ul {
+    display: flex;
+    justify-content: right;
+    position: relative;
+    top: 20px;
+    /* outline: 2px solid red; */
+}
+
+.header ul li {
+    margin-right: 25px;
+}
+
+/* header end */
+
+/* content start */
+.content {
+    max-width: 2000px;
+    display: flex;
+    justify-content: space-around;
+    /* outline: 2px solid blue; */
+    margin-top: 100px;
+}
+
+.card1, .card2, .card3 {
+    width: 30%;
+    display: flex;
+    flex-direction: column;
+    border: 2px solid lightgrey;
+    border-top: none;
+    border-radius: 6px;
+}
+
+.card1 h2, .card2 h2, .card3 h2 {
+    text-align: center;
+    font-weight: bolder;
+    margin-bottom: 10px;
+    font-size: 18px;
+}
+
+.card1 p, .card2 p, .card3 p {
+    text-align: center;
+    letter-spacing: 2px;
+    line-height: 1.5;
+}
+
+
+.card3 li {
+    list-style-type: disc;
+    margin-left: 40%;
+    line-height: 1.5;
+}
+
+.card1 img, .card2 img, .card3 img {
+    max-width: 100%;
+    height: auto;
+}
+/* content end */
+
+/* media query start */
+@media(max-width:768px) {
+    
+    .hexschoolLogo {
+        width: 50%;
+        position: relative;
+    }
+    .header ul {
+        flex-direction: column;
+    }
+    .content {
+        flex-direction: column;
+        width: 50%;
+    }
+}
+/* media query end */

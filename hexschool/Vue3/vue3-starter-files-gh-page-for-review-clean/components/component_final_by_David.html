@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/css/bootstrap.min.css"/><link href="images/favicon.ico" rel="shortcut icon"><script src="/javascripts/vendor.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/vue/3.2.37/vue.global.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js"></script>
+    <title>component_fianl by David</title>
+</head>
+<body class="bg-lighter">
+    <div id="app">
+        <div class="row" id="content">
+          <display-data :touristspot="touristspot" v-for="touristspot in displayData" :key="touristspot.Name"></display-data>
+        </div>
+        <div class="d-flex justify-content-center mt-4">
+          <nav aria-label="Page navigation example">
+            <ul class="pagination" id="pageid">
+              <page-button :totalpagenum="pageTotal" :currentpage="currentPage" @change-page="pagination"></page-button>
+            </ul>
+          </nav>
+        </div>
+      </div>
+     </body>
+    </div>  
+<style>
+    .img-cover {
+    object-fit: cover;
+    }
+</style>
+<script type="module">
+    const app = Vue.createApp({
+        data() {
+          return {  
+            KHtouristData: []
+            ,
+            //篩選每頁 20 筆後真正顯示的資料
+            displayData: [],
+            dataTotal: 0,
+            perPage: 20,
+            currentPage: 1,
+          };  
+        },
+        methods: {
+            getData() {
+                const KHtouristData  = 'https://api.kcg.gov.tw/api/service/Get/9c8e1450-e833-499c-8320-29b36b7ace5c';
+                axios.get(KHtouristData).then((res) => {
+                    this.KHtouristData = res.data.data.XML_Head.Infos.Info;
+                    this.pagination(this.currentPage)
+                })
+                .catch((err) => {
+                  console.log(error)
+                })
+            },
+            pagination(page) {
+              //避免當前頁數比總頁數還要多的邏輯：
+              if (page > this.pageTotal) {
+                page = this.pageTotal;
+              } else if (page < 1){
+                page = 1
+              }
+              this.currentPage = page;
+              // 分頁邏輯
+              const skip = (page - 1) * this.perPage;
+              this.displayData = this.KHtouristData.splice(skip, skip + this.perPage)
+            },
+        },
+        computed: {
+          //只要遠端資料總數有更改，都會觸發此 method，修改資料總數，並更改總頁數
+          pageTotal() {
+            //分頁數量公式（總資料數 / 每頁 20 筆 = 頁數）
+            return Math.ceil(this.KHtouristData.length / this.perPage)
+          },
+        },
+        created() {
+            this.getData();
+        },
+    });
+    app.component("displayData", {
+      props: ['touristspot'],
+      template:
+      `<div class="col-md-6 py-2">
+                      <div class="card">
+                        <div class="card bg-dark text-white text-left">
+                          <img class="card-img-top img-cover" style= "height=155px" :src="touristspot.Picture1">
+                          <div class="card-img-overlay d-flex justify-content-between align-items-end p-0 px-3" style="background-color: rgba(0, 0, 0, .2)">
+                            <h5 class="card-img-title-lg">{{ touristspot.Name }}</h5><h5 class="card-img-title-sm">{{ touristspot.Zone }}</h5>
+                          </div>
+                        </div>
+                        <div class="card-body text-left">
+                            <p class="card-text"><i class="far fa-clock fa-clock-time"></i>&nbsp;{{ touristspot.Opentime }}</p>
+                            <p class="card-text"><i class="fas fa-map-marker-alt fa-map-gps"></i>&nbsp;{{ touristspot.Add }}</p>
+                            <p class="card-text"><i class="fas fa-mobile-alt fa-mobile"></i>&nbsp;{{ touristspot.Tel }}</p>
+                          <div v-if="touristspot.Ticketinfo">
+                            <p class="card-text"><i class="fas fa-tags text-warning"></i>&nbsp;{{ touristspot.Ticketinfo }}</p>
+                          </div> 
+                        </div>
+                      </div>
+                    </div>`,
+    });
+    app.component("pageButton", {
+      props: ['totalpagenum', 'currentpage'],
+      template: 
+      // `<li :class="{'page-item disabled' : disablePrev}" @click.prevent="prevPage"><a class="page-link" href="#">Previous</a></li>
+      // <li :class="{'page-item active' : currentpage == index}" v-for="(index, key) in totalpagenum" :key="'index' + key"><a class="page-link" href="#" @click.prevent="change-page(index)>{{ index }}</a></li>
+      // <li :class="{'page-item disabled' : disableNext}" @click.prevent="nextPage"><a class="page-link" href="#">Next</a></li>`,
+      `<li :class="{'page-item disabled' : disablePrev}" @click.prevent="prevPage"><a class="page-link" href="#">Previous</a></li>
+        <li :class="{'page-item active' : currentpage == index}" v-for="index in totalpagenum"><a class="page-link" href="#" @click="changePage(index)">{{ index }}</a></li>
+        <li :class="{'page-item disabled' : disableNext}" @click.prevent="nextPage"><a class="page-link" href="#">Next</a></li>`,
+      emits: ['change-page'],
+      methods: {
+        changePage(page) {
+          this.$emit('change-page', page);
+        },
+        prevPage() {
+          this.$emit('change-page', this.currentpage - 1);
+        },
+        nextPage() {
+          this.$emit('change-page', this.currentpage + 1);
+        },
+      },
+      computed: {
+        disablePrev() {
+          return this.currentpage <= 1;
+        },
+        disableNext() {
+          return this.currentpage >= this.totalpagenum;
+        },
+      },
+    })
+
+   app.mount('#app') 
+</script>    
+</body>
+</html>

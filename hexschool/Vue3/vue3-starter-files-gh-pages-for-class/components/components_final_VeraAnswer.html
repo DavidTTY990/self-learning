@@ -1,0 +1,131 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/3.2.37/vue.global.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.3.4/axios.min.js"></script>
+  </head>
+  <body>
+    <div id="app">
+      <div class="container">
+        <div class="row" id="content">
+             <displayspot :touristspot="item" v-for="item in displayData" :key="item.Name"></displayspot>
+          </div>
+        </div>
+        <div class="d-flex justify-content-center">
+          <nav aria-label="Page navigation example">
+            <ul class="pagination" id="pageid">
+             <pagebutton :totalpagenum="pageTotal" :currentpage="currentPage" @change-page="pagination"></pagebutton>
+            </ul>.tyle>
+    <script type="module">
+      const app = Vue.createApp({
+        data() {
+          return {
+            touristSpotData: [], //所有資料儲存處
+            displayData: [], // 真正要顯示的資料（分頁後的資料）
+            touristSpotTotal: 0, //資料總數
+            perPage: 20, //每頁 20 筆資料
+            currentPage: 1, //當前頁面
+          };
+        },
+        methods: {
+          getData() {
+            const KHtouristSpotData = "https://api.kcg.gov.tw/api/service/Get/9c8e1450-e833-499c-8320-29b36b7ace5c";
+            axios.get(KHtouristSpotData).then((res) => {
+              this.touristSpotData = res.data.data.XML_Head.Infos.Info;
+              this.touristSpotTotal = this.touristSpotData.length;
+              this.pagination(this.currentPage)
+              })
+            .catch(err => {
+                alert('Fail to fetch API')
+            })  
+          },
+          pagination(page) {
+            // 取的當前頁數的20筆資料
+            if(page > this.pageTotal) {
+                page = this.pageTotal;
+            }
+            if(page < 1) {
+                page = 1;
+            }
+            this.currentPage = page;
+
+            // 從「要去的頁數」與「每頁呈現的資料筆數」算出要跳過的資料筆數
+            const skip = (page - 1) * this.perPage;
+            // slice(startIndex, endIndex)
+            this.displayData = this.touristSpotData.slice(skip, skip + this.perPage)
+            
+          },
+        },
+        created() {
+          this.getData();
+        },
+
+        computed: {
+            pageTotal() {
+                return Math.ceil(this.touristSpotData.length / this.perPage)
+            }
+        },
+      });
+
+      app.component("displayspot", {
+        props: ['touristspot'],
+        template: 
+        `<div class="col-md-6 py-2">
+                      <div class="card">
+                        <div class="card bg-dark text-white text-left">
+                          <img class="card-img-top img-cover" style= "height=155px" :src="touristspot.Picture1">
+                          <div class="card-img-overlay d-flex justify-content-between align-items-end p-0 px-3" style="background-color: rgba(0, 0, 0, .2)">
+                            <h5 class="card-img-title-lg">{{touristspot.Name}}</h5><h5 class="card-img-title-sm">{{touristspot.Zone}}</h5>
+                          </div>
+                        </div>
+                        <div class="card-body text-left">
+                            <p class="card-text"><i class="far fa-clock fa-clock-time"></i>&nbsp;{{ touristspot.Opentime }}</p>
+                            <p class="card-text"><i class="fas fa-map-marker-alt fa-map-gps"></i>&nbsp;{{ touristspot.Add }}</p>
+                            <p class="card-text"><i class="fas fa-mobile-alt fa-mobile"></i>&nbsp;{{ touristspot.Tel }}</p>
+                          <div v-if="touristspot.Ticketinfo">
+                            <p class="card-text"><i class="fas fa-tags text-warning"></i>&nbsp;{{ touristspot.Ticketinfo }}</p>
+                          </div> 
+                        </div>
+                      </div>
+                    </div>`,
+      });
+
+      app.component("pagebutton", {
+        props: ['totalpagenum', 'currentpage'],
+        template:
+        `<li :class="{'page-item disabled' : disablePrev}" @click.prevent="prevPage"><a class="page-link" href="#">Previous</a></li>
+        <li :class="{'page-item active' : currentpage == index}" v-for="index in totalpagenum"><a class="page-link" href="#" @click="changePage(index)">{{ index }}</a></li>
+        <li :class="{'page-item disabled' : disableNext}" @click.prevent="nextPage"><a class="page-link" href="#">Next</a></li>`,
+        emits:['change-page'],
+        methods: {
+            changePage(page) {
+                this.$emit('change-page', page);
+            },
+            nextPage() {
+                this.$emit('change-page', this.currentpage + 1)
+            },
+            prevPage() {
+                this.$emit('change-page', this.currentpage - 1)
+            }
+        },
+        computed: {
+            disablePrev() {
+                return this.currentpage <= 1;
+            },
+            disableNext() {
+                return this.currentpage >= this.totalpagenum;
+            }
+        }
+      })
+      app.mount("#app");
+    </script>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css">
+  </body>
+</html>

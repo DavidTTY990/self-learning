@@ -1,0 +1,792 @@
+/* css reset start */
+html,
+body,
+div,
+span,
+applet,
+object,
+iframe,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+blockquote,
+pre,
+a,
+abbr,
+acronym,
+address,
+big,
+cite,
+code,
+del,
+dfn,
+em,
+img,
+ins,
+kbd,
+q,
+s,
+samp,
+small,
+strike,
+strong,
+sub,
+sup,
+tt,
+var,
+b,
+u,
+i,
+center,
+dl,
+dt,
+dd,
+ol,
+ul,
+li,
+fieldset,
+form,
+label,
+legend,
+table,
+caption,
+tbody,
+tfoot,
+thead,
+tr,
+th,
+td,
+article,
+aside,
+canvas,
+details,
+embed,
+figure,
+figcaption,
+footer,
+header,
+hgroup,
+menu,
+nav,
+output,
+ruby,
+section,
+summary,
+time,
+mark,
+audio,
+video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline;
+}
+/* HTML5 display-role reset for older browsers */
+article,
+aside,
+details,
+figcaption,
+figure,
+footer,
+header,
+hgroup,
+menu,
+nav,
+section {
+  display: block;
+}
+body {
+  line-height: 1;
+}
+ol,
+ul {
+  list-style: none;
+}
+blockquote,
+q {
+  quotes: none;
+}
+blockquote:before,
+blockquote:after,
+q:before,
+q:after {
+  content: "";
+  content: none;
+}
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+/* css reset end */
+
+*,
+*:before,
+*:after {
+  box-sizing: border-box;
+  outline: none;
+}
+
+@font-face {
+  font-family: 'Quella Serif';
+  src: url('fonts/Quella\ Serif\ Font/quella-owyda.otf');
+  font-weight: normal;
+  font-style: normal;
+}
+
+.wrap-container {
+  font-family: "Poppins", sans-serif;
+}
+
+.nav-bar-logo, .footer-logo {
+  font-family: "Quella Serif";
+}
+
+/* Navbar start */
+.nav-bar {
+  width: 100%;
+  display: flex;
+}
+
+.nav-bar-logo {
+  color: #1e1e1e;
+  font-size: 24px;
+  margin-left: 5%;
+  margin-top: 1.5%;
+}
+
+.buttons-container {
+  width: 90%;
+  display: flex;
+  justify-content: space-between;
+}
+
+.menu-btn-left {
+  display: flex;
+  font-size: 18px;
+  margin-left: 10%;
+  margin-top: 2%;
+}
+
+.menu-btn-left li {
+  margin-right: 20%;
+}
+
+.menu-btn-left li a {
+  text-decoration: none;
+  color: #1e1e1e;
+}
+
+.menu-btn-right {
+  display: flex;
+  margin-right: 12%;
+  margin-top: 2%;
+}
+
+.menu-btn-right li {
+  margin-right: 50%;
+}
+
+.menu-btn-right li a {
+  color: #1e1e1e;
+}
+/* Navbar end */
+
+.hero-cover {
+  width: 90%;
+  margin-left: 4%;
+  margin-top: 2%;
+  border-radius: 24px;
+  background-color: #c1dcdc;
+  display: flex;
+}
+
+.hero-cover-left {
+  display: inline-block;
+  margin-top: 5%;
+}
+
+.hero-cover-left h1 {
+  font-size: 64px;
+  font-weight: 800;
+  margin-top: 10%;
+  margin-left: 15%;
+}
+
+.hero-cover-left-info-container {
+  display: flex;
+  margin-top: 5%;
+  margin-left: 15%;
+}
+
+.hero-cover-left-info-container h3 {
+  font-size: 32px;
+  font-weight: 400;
+}
+
+.hero-cover-left-info-container p {
+  font-size: 18px;
+  font-weight: 400;
+}
+
+.hero-cover-left-vertical-line {
+  width: 1px;
+  height: 60px;
+  border: 1px solid #1e1e1e;
+  margin-top: 1.5%;
+  margin-left: 5%;
+
+  /* transform: rotate(90deg); */
+}
+.plant-species {
+  line-height: 1.5;
+}
+.customers {
+  margin-left: 5%;
+  line-height: 1.5;
+}
+
+.search-box-container {
+  width: 60%;
+  margin-top: 5%;
+  margin-left: 15%;
+  position: relative;
+}
+
+.search-box-input input {
+  height: 3.8em;
+  width: 340px;
+  border: none;
+  border-radius: 10px;
+}
+
+.search-box-input input::placeholder {
+  padding-left: 1em;
+  font-size: 18px;
+}
+
+/* placeholder issue form here: https://stackoverflow.com/questions/22431297/placeholder-doesnt-disappear-when-input-field-in-focus */
+.search-box-input input:focus::-webkit-input-placeholder {
+  color: transparent;
+}
+.search-box-input input:focus:-moz-placeholder {
+  color: transparent;
+} /* Firefox 18- */
+.search-box-input input:focus::-moz-placeholder {
+  color: transparent;
+} /* Firefox 19+ */
+.search-box-input input:focus:-ms-input-placeholder {
+  color: transparent;
+} /* oldIE 😉 */
+
+.search-icon {
+  position: absolute;
+  top: 5px;
+  left: 295px;
+}
+
+.search-icon button {
+  height: 3em;
+  width: 3em;
+  border: none;
+  border-radius: 10px;
+  background-color: #c1dcdc;
+}
+
+.hero-cover-right-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 5%;
+}
+
+.hero-cover-arrow-1-container {
+  margin-top: 30%;
+  margin-right: 2%;
+}
+
+.hero-cover-plant-background {
+  height: 400px;
+  width: 450px;
+  margin-top: 30%;
+  border-radius: 200px 200px 0px 200px;
+  background-color: black;
+  position: relative;
+}
+
+.hero-cover-arrow-2-container {
+  margin-bottom: 40%;
+  margin-right: 8%;
+}
+
+.hero-cover-plant-images {
+  top: 35%;
+  left: 60%;
+  position: absolute;
+}
+
+.best-selling-section-container {
+  display: flex;
+  width: 90%;
+  margin-left: 4%;
+  margin-top: 2%;
+}
+
+.best-selling-text {
+  width: 30%;
+  margin-top: 4%;
+}
+
+.best-selling-text h2 {
+  font-size: 32px;
+  font-weight: bold;
+  line-height: 48px;
+}
+
+.best-selling-text p {
+  font-size: 18px;
+  line-height: 27px;
+  color: #1e1e1e80;
+}
+
+.best-selling-text button {
+  padding: 12px 30px;
+  border-radius: 8px;
+  margin-top: 5%;
+  background-color: #c1dcdc;
+  border: none;
+  /* display: inline-block; */
+}
+
+.best-selling-text button a {
+  font-size: 18px;
+  color: #1e1e1e;
+  text-decoration: none;
+}
+
+.best-selling-info {
+  width: 70%;
+}
+
+.best-selling-info ul {
+  display: flex;
+  justify-content: space-around;
+}
+
+.best-selling-info ul li {
+  width: 100%;
+}
+
+.best-selling-info ul li h3 {
+  margin-left: 15%;
+  font-size: 18px;
+  line-height: 2.5;
+}
+
+.best-selling-info ul li p {
+  margin-left: 15%;
+  color: #1e1e1e80;
+}
+
+.product-img-1 {
+  width: 85%;
+  height: 300%;
+  background-image: url("images/best-selling-plants-1.png");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center center;
+  border-radius: 12px;
+  margin-top: 20%;
+  margin-left: 15%;
+}
+
+.product-img-2 {
+  width: 85%;
+  height: 300%;
+  background-image: url("images/best-selling-plants-2.png");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center center;
+  border-radius: 12px;
+  margin-top: 20%;
+  margin-left: 15%;
+}
+
+.product-img-3 {
+  width: 85%;
+  height: 300%;
+  background-image: url("images/best-selling-plants-3.png");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center center;
+  border-radius: 12px;
+  margin-top: 20%;
+  margin-left: 15%;
+}
+
+.about-us-container {
+  width: 90%;
+  margin-left: 4%;
+  text-align: center;
+  margin-top: 25%;
+  margin-bottom: 15%;
+}
+
+.about-us-title h2 {
+  font-size: 32px;
+  font-weight: 700;
+  line-height: 4;
+  color: #1e1e1e;
+}
+
+.about-us-container p {
+  font-size: 18px;
+  color: #1e1e1e80;
+}
+
+.about-us-container h3 {
+  margin-top: 20px;
+  font-size: 18px;
+  font-weight: 400;
+}
+
+.about-us-icons {
+  height: 100px;
+  width: 100px;
+  border-radius: 50%;
+  background-color: #c1dcdc;
+}
+
+.about-us-icons img {
+  margin-top: 30%;
+}
+
+.about-us-content ul {
+  display: flex;
+  justify-content: center;
+  line-height: 27px;
+  margin-top: 5%;
+}
+
+.about-us-content ul li {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 30%;
+}
+
+.about-us-content ul li h3 {
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.categories-container {
+  width: 100%;
+}
+
+.categories-title-container {
+  text-align: center;
+}
+
+.categories-title-container h2 {
+  font-size: 32px;
+  font-weight: 700;
+  line-height: 4;
+  color: #1e1e1e;
+}
+
+.categories-title-container p {
+  font-size: 18px;
+  color: #1e1e1e80;
+}
+
+.categories-content-container {
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+  background-color: #c1dcdc;
+  margin-top: 5%;
+}
+
+.categories-content-container img {
+  width: 352px;
+  margin-top: 20%;
+}
+
+.categories-image-left img, .categories-image-right img {
+  position: relative;
+  top: -130px;
+}
+
+.categories-image-left h3  {
+  font-size: 20px;
+  font-weight: 700;
+  text-align: center;
+  position: relative;
+  top: -120px;
+}
+
+.categories-image-mid {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 5%;
+}
+
+.categories-image-mid h3 {
+  font-size: 20px;
+  font-weight: 700;
+  margin-top: 3%;
+  text-align: center;
+}
+
+.categories-image-mid p {
+  margin-top: 3%;
+  color: #1e1e1e80;
+}
+
+.categories-image-mid button {
+  width: 32%;
+  padding: 12px 30px;
+  border-radius: 8px;
+  margin-top: 5%;
+  background-color: white;
+  border: none;
+}
+
+.categories-image-mid button a {
+  font-size: 18px;
+  color: #1e1e1e;
+  text-decoration: none;
+}
+
+.categories-image-right h3  {
+  font-size: 20px;
+  font-weight: 700;
+  text-align: center;
+  position: relative;
+  top: -120px;
+}
+
+.customer-review-container {
+  width: 100%;
+  overflow-x: hidden;
+}
+
+.customer-review-title-container {
+  display: flex;
+  justify-content: space-around;
+  margin-top: 5%;
+}
+
+.customer-review-title-container h2 {
+  width: 25%;
+  font-size: 32px;
+  font-weight: 800;
+  line-height: 1.5;
+}
+
+.page-select-bar-container {
+  display: flex;
+}
+
+.page-select-bar-long {
+  width: 60px;
+  height: 6px;
+  border-radius: 10px;
+  margin-left: 10px;
+  background-color: #c1dcdc;
+}
+
+.page-select-bar-short {
+  width: 20px;
+  height: 6px;
+  border-radius: 10px;
+  margin-left: 7px;
+  background-color: #d9d9d9;
+}
+
+.customer-review-overflow-container {
+  width: 200%;
+}
+
+.customer-review-blocks-container {
+  width: 100%;
+  display: flex;
+}
+
+.customer-review-blocks-1 {
+  width: 30%;
+  margin-left: 4%;
+  margin-top: 2%;
+  border-radius: 24px;
+  background-color: #c1dcdc;
+}
+
+.blocks-1-content-container {
+  width: 80%;
+  margin-left: 10%;
+  margin-top: 5%;
+}
+
+.blocks-1-content-container p {
+  font-size: 20px;
+  font-weight: 400;
+  line-height: 1.5;
+}
+
+.blocks-1-customer-review-container {
+  width: 100%;
+  display: flex;
+}
+
+.customer-img-1 {
+  height: 270px;
+  width: 195px;
+  margin-left: 10%;
+  background-image: url("images/customer-img-1.png");
+  background-size: 200px;
+  background-repeat: no-repeat;
+}
+
+.customer-name-1 {
+  margin-top: 5%;
+  margin-left: 2%;
+}
+
+.customer-name-1 h3 {
+  font-size: 25px;
+  font-weight: 700;
+  line-height: 1.5;
+}
+
+.customer-name-1 p {
+  font-size: 20px;
+  color: #1e1e1e80;
+}
+
+.customer-rating-1 {
+  display: flex;
+  margin-left: 35%;
+  margin-top: 5%;
+}
+
+.customer-rating-1 i {
+  margin-top: 10px;
+}
+
+.customer-rating-1 p {
+  font-size: 25px;
+  font-weight: 700;
+  margin-bottom: 2px;
+}
+
+.customer-review-blocks-2 {
+  width: 30%;
+  margin-left: 4%;
+  margin-top: 2%;
+  border-radius: 24px;
+  background-color: #c1dcdc;
+}
+
+.customer-img-2 {
+  height: 270px;
+  width: 195px;
+  margin-left: 10%;
+  background-image: url("images/customer-img-2.png");
+  background-size: 200px;
+  background-repeat: no-repeat;
+}
+
+.footer-container {
+  width: 100%;
+  background-color: #c1dcdc;
+  padding: 0.1px;
+  margin-top: 10%;
+  padding-bottom: 2.5%;
+  display: flex;
+}
+
+.footer-left-container {
+  width: 30%;
+  margin-left: 8%;
+  margin-top: 5%;
+}
+
+.footer-logo {
+  font-size: 22px;
+}
+
+.footer-left-container p {
+  margin-top: 20px;
+  font-size: 18px;
+  line-height: 1.5;
+  color:#1e1e1e80
+}
+
+.social-media {
+  display: flex;
+  justify-content: space-between;
+  width: 45%;
+  margin-top: 20px;
+}
+
+.social-media-facebook,
+.social-media-instagram,
+.social-media-twitter {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 3em;
+  height: 3em;
+  border: 1px solid #1e1e1e80;
+  border-radius: 50px;
+}
+
+.social-media-facebook a,
+.social-media-instagram a,
+.social-media-twitter a {
+  color:#1e1e1e80
+}
+
+.copyright {
+  margin-top: 15%;
+  font-size: 18px;
+  color: #1e1e1e;
+}
+
+.footer-right-container {
+  width: 30%;
+  margin-left: 25%;
+  margin-top: 3%;
+}
+
+.footer-right-menu {
+  display: flex;
+  justify-content: space-between;
+}
+
+.footer-right-menu a {
+  text-decoration: none;
+  color: #1e1e1e80;
+}
+
+.footer-right-menu-left,
+.footer-right-menu-mid,
+.footer-right-menu-right {
+  display: flex;
+  flex-direction: column;
+  line-height: 3;
+}
+
+.footer-right-menu-left-title a,
+.footer-right-menu-mid-title a,
+.footer-right-menu-right-title a {
+  font-weight: bold;
+  color: black;
+}
