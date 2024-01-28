@@ -1,12 +1,18 @@
-import { useState } from "react";
-
 const initialGamePanel = [
   [null, null, null],
   [null, null, null],
   [null, null, null],
 ];
 
-export default function GamePanel({onSelectSquare}) {
+export default function GamePanel({onSelectSquare, turns}) {
+    let gamePanel = initialGamePanel;
+
+    for(const turn of turns) {
+        const { square, player } = turn;
+        const { row, col } = square;
+
+        gamePanel[row][col] = player;
+    }
   // const [gamePanel, setGamePanel] = useState(initialGamePanel);
 
   // function handleSelectSquare(rowIndex, colIndex) {
@@ -29,7 +35,7 @@ export default function GamePanel({onSelectSquare}) {
             {row.map((playerSymbol, colIndex) => (
               <li key={colIndex}>
                 <button
-                  onClick={() => onSelectSquare()}
+                  onClick={() => onSelectSquare(rowIndex, colIndex)}
                 >
                   {playerSymbol}
                 </button>

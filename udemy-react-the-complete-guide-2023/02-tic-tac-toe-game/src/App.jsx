@@ -9,9 +9,9 @@ function App() {
   const [gameTurns, setGameTurns] = useState([]);
   function handleSwitchTurns(rowIndex, colIndex) {
     setCurrentPlayer((currentActivePlayer) => currentActivePlayer === "X" ? "O" : "X");
-    setGameTurns(prevTurns => {
+    setGameTurns((prevTurns) => {
       let currentPlayer = "X";
-      if(prevTurns[0].player.length > 0 && prevTurns[0].player === "X") {
+      if (prevTurns.length > 0 && prevTurns[0].player === "X") {
         currentPlayer = "O"
       }
 
@@ -20,7 +20,6 @@ function App() {
       return updatedTurns;
     })
   }
-  function onSelectSquare(){}
 
   return (
     <main>
@@ -39,6 +38,7 @@ function App() {
         </ol>
         <GamePanel
           onSelectSquare={handleSwitchTurns}
+          turns={gameTurns}
         />
       </div>
       <GameLog />
