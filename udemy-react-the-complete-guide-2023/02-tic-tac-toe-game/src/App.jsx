@@ -1,14 +1,27 @@
 import { useState } from "react";
-import Player from "./Components/Player";
-import GamePanel from "./Components/GamePanel";
+import Player from "./Components/Player.jsx";
+import GamePanel from "./Components/GamePanel.jsx";
+import GameLog from "./Components/GameLog.jsx";
 
 function App() {
   // Lifting the state up while multiple children components share the same state
   const [currentPlayer, setCurrentPlayer] = useState("X");
-  function handleSwitchTurns() {
+  const [gameTurns, setGameTurns] = useState([]);
+  function handleSwitchTurns(rowIndex, colIndex) {
     setCurrentPlayer((currentActivePlayer) => currentActivePlayer === "X" ? "O" : "X");
-    console.log(currentPlayer);
+    setGameTurns(prevTurns => {
+      let currentPlayer = "X";
+      if(prevTurns[0].player.length > 0 && prevTurns[0].player === "X") {
+        currentPlayer = "O"
+      }
+
+      const updatedTurns = [{square: {row: rowIndex, col: colIndex}, player: currentPlayer}, ...prevTurns];
+
+      return updatedTurns;
+    })
   }
+  function onSelectSquare(){}
+
   return (
     <main>
       <div id="game-container">
@@ -25,10 +38,10 @@ function App() {
           />
         </ol>
         <GamePanel
-          handleSwitchTurns={handleSwitchTurns}
-          currentActivePlayer={currentPlayer}
+          onSelectSquare={handleSwitchTurns}
         />
       </div>
+      <GameLog />
     </main>
   );
 }

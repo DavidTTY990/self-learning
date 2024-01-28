@@ -6,20 +6,20 @@ const initialGamePanel = [
   [null, null, null],
 ];
 
-export default function GamePanel({handleSwitchTurns, currentActivePlayer}) {
-  const [gamePanel, setGamePanel] = useState(initialGamePanel);
+export default function GamePanel({onSelectSquare}) {
+  // const [gamePanel, setGamePanel] = useState(initialGamePanel);
 
-  function handleSelectSquare(rowIndex, colIndex) {
-    setGamePanel((prevGamePanel) => {
-      // *strongly recommand *use shallow copy to keep original array immutable.
-      const updatedGamePanel = [
-        ...prevGamePanel.map((innerArray) => [...innerArray]),
-      ];
-      updatedGamePanel[rowIndex][colIndex] = currentActivePlayer;
-      return updatedGamePanel;
-    })
-    handleSwitchTurns();
-  }
+  // function handleSelectSquare(rowIndex, colIndex) {
+  //   setGamePanel((prevGamePanel) => {
+  //     // *strongly recommand *use shallow copy to keep original array immutable.
+  //     const updatedGamePanel = [
+  //       ...prevGamePanel.map((innerArray) => [...innerArray]),
+  //     ];
+  //     updatedGamePanel[rowIndex][colIndex] = currentActivePlayer;
+  //     return updatedGamePanel;
+  //   })
+  //   handleSwitchTurns();
+  // }
 
   return (
     <ol id="game-board">
@@ -29,7 +29,7 @@ export default function GamePanel({handleSwitchTurns, currentActivePlayer}) {
             {row.map((playerSymbol, colIndex) => (
               <li key={colIndex}>
                 <button
-                  onClick={() => handleSelectSquare(rowIndex, colIndex)}
+                  onClick={() => onSelectSquare()}
                 >
                   {playerSymbol}
                 </button>
