@@ -7,16 +7,17 @@ function App() {
   // Lifting the state up while multiple children components share the same state
   const [currentPlayer, setCurrentPlayer] = useState("X");
   const [gameTurns, setGameTurns] = useState([]);
+
   function handleSwitchTurns(rowIndex, colIndex) {
     setCurrentPlayer((currentActivePlayer) => currentActivePlayer === "X" ? "O" : "X");
     setGameTurns((prevTurns) => {
-      let currentPlayer = "X";
+      let currentActivePlayer = "X";
       if (prevTurns.length > 0 && prevTurns[0].player === "X") {
-        currentPlayer = "O"
+        currentActivePlayer = "O";
       }
 
-      const updatedTurns = [{square: {row: rowIndex, col: colIndex}, player: currentPlayer}, ...prevTurns];
-
+      const updatedTurns = [{square: {row: rowIndex, col: colIndex}, player: currentActivePlayer}, ...prevTurns];
+      console.log(updatedTurns)
       return updatedTurns;
     })
   }
@@ -41,7 +42,7 @@ function App() {
           turns={gameTurns}
         />
       </div>
-      <GameLog />
+      <GameLog turns={gameTurns} />
     </main>
   );
 }
