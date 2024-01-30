@@ -3,23 +3,36 @@ import Player from "./Components/Player.jsx";
 import GamePanel from "./Components/GamePanel.jsx";
 import GameLog from "./Components/GameLog.jsx";
 
+function derivedActivePlayer(gameTurns) {
+  let currentActivePlayer = "X";
+      if (gameTurns.length > 0 && gameTurns[0].player === "X") {
+        currentActivePlayer = "O";
+  }
+  return currentActivePlayer;
+}
 function App() {
   // Lifting the state up while multiple children components share the same state
-  const [currentPlayer, setCurrentPlayer] = useState("X");
   const [gameTurns, setGameTurns] = useState([]);
+  // const [currentPlayer, setCurrentPlayer] = useState("X");
+
+  const currentActivePlayer = derivedActivePlayer(gameTurns);
 
   function handleSwitchTurns(rowIndex, colIndex) {
-    setCurrentPlayer((currentActivePlayer) => currentActivePlayer === "X" ? "O" : "X");
+    // setCurrentPlayer((currentActivePlayer) =>
+    //   currentActivePlayer === "X" ? "O" : "X"
+    // );
     setGameTurns((prevTurns) => {
-      let currentActivePlayer = "X";
-      if (prevTurns.length > 0 && prevTurns[0].player === "X") {
-        currentActivePlayer = "O";
-      }
-
-      const updatedTurns = [{square: {row: rowIndex, col: colIndex}, player: currentActivePlayer}, ...prevTurns];
-      console.log(updatedTurns)
+      const currentActivePlayer = derivedActivePlayer(prevTurns);
+      const updatedTurns = [
+        {
+          square: { row: rowIndex, col: colIndex },
+          player: currentActivePlayer,
+        },
+        ...prevTurns,
+      ];
+      console.log(updatedTurns);
       return updatedTurns;
-    })
+    });
   }
 
   return (
@@ -37,10 +50,7 @@ function App() {
             isActive={currentPlayer === "O"}
           />
         </ol>
-        <GamePanel
-          onSelectSquare={handleSwitchTurns}
-          turns={gameTurns}
-        />
+        <GamePanel onSelectSquare={handleSwitchTurns} turns={gameTurns} />
       </div>
       <GameLog turns={gameTurns} />
     </main>
