@@ -42,12 +42,12 @@ function App() {
           <Player
             initialPlayerName="player 1"
             playerSymbol="X"
-            isActive={currentPlayer === "X"}
+            isActive={currentActivePlayer === "X"}
           />
           <Player
             initialPlayerName="player 2"
             playerSymbol="O"
-            isActive={currentPlayer === "O"}
+            isActive={currentActivePlayer === "O"}
           />
         </ol>
         <GamePanel onSelectSquare={handleSwitchTurns} turns={gameTurns} />
