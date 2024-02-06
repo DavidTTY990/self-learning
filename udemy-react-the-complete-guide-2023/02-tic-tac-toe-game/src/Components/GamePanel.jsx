@@ -1,18 +1,18 @@
-const initialGamePanel = [
-  [null, null, null],
-  [null, null, null],
-  [null, null, null],
-];
+// const initialGamePanel = [
+//   [null, null, null],
+//   [null, null, null],
+//   [null, null, null],
+// ];
 
-export default function GamePanel({ onSelectSquare, turns }) {
-  let gamePanel = initialGamePanel;
+export default function GamePanel({ onSelectSquare, board }) {
+  // let gamePanel = initialGamePanel;
 
-  for (const turn of turns) {
-    const { square, player } = turn;
-    const { row, col } = square;
+  // for (const turn of turns) {
+  //   const { square, player } = turn;
+  //   const { row, col } = square;
 
-    gamePanel[row][col] = player;
-  }
+  //   gamePanel[row][col] = player;
+  // }
   // const [gamePanel, setGamePanel] = useState(initialGamePanel);
 
   // function handleSelectSquare(rowIndex, colIndex) {
@@ -29,7 +29,7 @@ export default function GamePanel({ onSelectSquare, turns }) {
 
   return (
     <ol id="game-board">
-      {gamePanel.map((row, rowIndex) => (
+      {board.map((row, rowIndex) => (
         <li key={rowIndex}>
           <ol>
             {row.map((playerSymbol, colIndex) => (
