@@ -4,6 +4,7 @@ import "bootstrap/dist/js/bootstrap.bundle.min"; // Bootstrap Bundle JS
 import React from "react";
 import { GoogleMap, useJsApiLoader, Marker } from "@react-google-maps/api";
 import "./App.css";
+import mapJson from './map.json'
 
 const mapContainerStyle = {
   width: "100%",
@@ -15,11 +16,14 @@ const defaultPosition = {
   lng: 121.5647688,
 };
 
+// 控制地圖內建 UI 顯示
 const customizedOptions = {
   disableDefaultUI: false,
+  scaleControl: false,
+  mapTypeControl: false,
+  streetViewControl: false,
+  fullscreenControl: false,
 };
-
-
 
 function App() {
   const { isLoaded, loadError } = useJsApiLoader({
@@ -52,14 +56,22 @@ function App() {
   //   }
   // }
 
+  function showAllLocationInList() {}
+
   function smoothZoom(map, targetZoomLevel, currentZoomLevel) {
-    if(targetZoomLevel <= currentZoomLevel){
-      return
+    if (targetZoomLevel <= currentZoomLevel) {
+      return;
     } else {
-      google.maps.event.addListenerOnce(map, 'zoom_changed', function(event){
-        smoothZoom(map,targetZoomLevel, currentZoomLevel + (targetZoomLevel > currentZoomLevel ? 1 : -1));
+      google.maps.event.addListenerOnce(map, "zoom_changed", function (event) {
+        smoothZoom(
+          map,
+          targetZoomLevel,
+          currentZoomLevel + (targetZoomLevel > currentZoomLevel ? 1 : -1)
+        );
       });
-      setTimeout(function() { map.setZoom(currentZoomLevel)}, 80)
+      setTimeout(function () {
+        map.setZoom(currentZoomLevel);
+      }, 80);
     }
   }
 
@@ -72,7 +84,7 @@ function App() {
       };
       setCurrentPosition(userPosition);
       // map.setZoom(15);
-      smoothZoom(map, 15, map.getZoom());
+      smoothZoom(map, 17, map.getZoom());
       map.panTo(userPosition);
     });
   };
@@ -137,7 +149,7 @@ function App() {
             mapContainerStyle={mapContainerStyle}
             zoom={7}
             center={currentPosition}
-            options={customizedOptions.disableDefaultUI}
+            options={customizedOptions}
             onLoad={handleMapLoad}
           >
             <Marker position={currentPosition} />
