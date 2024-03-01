@@ -1,5 +1,5 @@
 import logo from "./assets/investment-calculator-logo.png";
-import Header from "./Components/Header";
+import Header from "./components/Header"
 import UserInput from "./Components/UserInput";
 import ResultTable from "./Components/ResultTable";
 import { useState } from "react";
@@ -7,11 +7,13 @@ import { calculateInvestmentResults, formatter } from "./util/investment";
 
 function App() {
   const [userInput, setUserInput] = useState({
-    initialInvestment: 0,
-    annualInvestment: 0,
-    expectedReturn: 0,
-    duration: 0,
+    initialInvestment: 1,
+    annualInvestment: 1,
+    expectedReturn: 1,
+    duration: 1,
   });
+
+  const inputIsValid = userInput.duration >= 1;
 
   function handleSetUserInput(e) {
     const { name, value } = e.target;
@@ -21,13 +23,12 @@ function App() {
       }));
   }
 
-  const resultsData = calculateInvestmentResults(userInput);
-
   return (
     <>
       <Header logo={logo} />
       <UserInput handleSetUserInput={handleSetUserInput} />
-      <ResultTable resultsData={resultsData} formatter={formatter} />
+      {!inputIsValid && <p className="center">Duration should be greater than zero</p>}
+      {inputIsValid && <ResultTable userInput={userInput} formatter={formatter} />}
     </>
   );
 }
