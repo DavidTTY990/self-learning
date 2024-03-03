@@ -9,6 +9,7 @@
       },
       "properties": {
         "id": 1,
+        "identifier": "朵朵嚐嚐",
         "name": "朵朵嚐嚐貓咪中途咖啡廳（無接待12歲以下孩童）",
         "site": "105台北市松山區敦化北路222巷17-2號"
       }
@@ -21,6 +22,7 @@
       },
       "properties": {
         "id": 2,
+        "identifier": "貓谷",
         "name": "貓谷",
         "site": "231新北市新店區雙城路175號之三"
       }
@@ -33,6 +35,7 @@
         },
         "properties": {
           "id": 3,
+          "identifier": "Toast Chat",
           "name": "Toast Chat",
           "site": "106台北市大安區光復南路290巷58號"
         }

@@ -4,7 +4,7 @@ import "bootstrap/dist/js/bootstrap.bundle.min"; // Bootstrap Bundle JS
 import React from "react";
 import { GoogleMap, useJsApiLoader, Marker } from "@react-google-maps/api";
 import "./App.css";
-import mapJson from './map.json'
+import mapJson from "./map.json";
 
 const mapContainerStyle = {
   width: "100%",
@@ -89,6 +89,25 @@ function App() {
     });
   };
 
+  const handleTargetLocationClick = (e, targetLocationName) => {
+    e.preventDefault();
+    let targetPosition;
+
+    mapJson["features"].forEach((item) => {
+      if (targetLocationName === item.properties.identifier) {
+        const targetPositionCoord = {
+          lat: item["geometry"]["coordinates"][0],
+          lng: item["geometry"]["coordinates"][1],
+        };
+        targetPosition = targetPositionCoord;
+      }
+    });
+
+    setCurrentPosition(targetPosition);
+    smoothZoom(map, 17, map.getZoom());
+    map.panTo(targetPosition);
+  };
+
   if (loadError) {
     return <div>Error Loading Maps</div>;
   }
@@ -114,7 +133,7 @@ function App() {
             <button type="button" className="btn btn-dark btn-lg">
               註冊
             </button>
-            <button type="button" className="btn btn-light btn-lg">
+            <button type="button" className="btn btn-light btn-lg ms-3">
               登入
             </button>
           </div>
@@ -144,6 +163,33 @@ function App() {
             </div>
           </div>
         </section>
+        <div
+          className="btn-group-vertical"
+          style={{
+            position: "absolute",
+            zIndex: 3,
+            right: "5%",
+          }}
+        >
+          <button
+            className="btn btn-warning btn-lg mt-2"
+            onClick={(e) => handleTargetLocationClick(e, "朵朵嚐嚐")}
+          >
+            <span>朵朵嚐嚐</span>
+          </button>
+          <button
+            className="btn btn-warning btn-lg mt-2"
+            onClick={(e) => handleTargetLocationClick(e, "貓谷")}
+          >
+            <span>貓谷</span>
+          </button>
+          <button
+            className="btn btn-warning btn-lg mt-2"
+            onClick={(e) => handleTargetLocationClick(e, "Toast Chat")}
+          >
+            <span>Toast Chat</span>
+          </button>
+        </div>
         <section className="map-container">
           <GoogleMap
             mapContainerStyle={mapContainerStyle}
