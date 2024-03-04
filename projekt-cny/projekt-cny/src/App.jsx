@@ -2,7 +2,12 @@
 import "bootstrap/dist/css/bootstrap.min.css"; // Bootstrap CSS
 import "bootstrap/dist/js/bootstrap.bundle.min"; // Bootstrap Bundle JS
 import React from "react";
-import { GoogleMap, useJsApiLoader, Marker } from "@react-google-maps/api";
+import {
+  GoogleMap,
+  useJsApiLoader,
+  Marker,
+  InfoWindow,
+} from "@react-google-maps/api";
 import "./App.css";
 import mapJson from "./map.json";
 
@@ -28,8 +33,10 @@ const customizedOptions = {
 function App() {
   const { isLoaded, loadError } = useJsApiLoader({
     id: "google-map-script",
-    googleMapsApiKey: `${import.meta.env.VITE_MY_GOOGLE_MAPS_API_KEY}`,
+    googleMapsApiKey: `${import.meta.env.VITE_MY_GOOGLE_MAPS_API_KEY}`, // 使用 .env 保存金鑰變數
   });
+
+  // Map setting start
   const mapRef = React.useRef();
   const [map, setMap] = React.useState(null);
   const [currentPosition, setCurrentPosition] = React.useState(defaultPosition);
@@ -40,6 +47,7 @@ function App() {
     setMap(map);
     onLoad(map);
   }, []);
+  // Map setting end
 
   // about smoothZoom: https://stackoverflow.com/questions/4752340/how-to-zoom-in-smoothly-on-a-marker-in-google-maps
   // function smoothZoom(map, targetZoomLevel, currentZoomLevel) {
@@ -75,7 +83,7 @@ function App() {
     }
   }
 
-  const handleCurrentLocationClick = (e) => {
+  function handleCurrentLocationClick(e) {
     e.preventDefault();
     navigator.geolocation.getCurrentPosition((position) => {
       const userPosition = {
@@ -87,14 +95,14 @@ function App() {
       smoothZoom(map, 17, map.getZoom());
       map.panTo(userPosition);
     });
-  };
+  }
 
-  const handleTargetLocationClick = (e, targetLocationName) => {
-    e.preventDefault();
+  function handleTargetLocationClick(e, identifier) {
+    e.preventDefault;
     let targetPosition;
 
     mapJson["features"].forEach((item) => {
-      if (targetLocationName === item.properties.identifier) {
+      if (identifier === item.properties.identifier) {
         const targetPositionCoord = {
           lat: item["geometry"]["coordinates"][0],
           lng: item["geometry"]["coordinates"][1],
@@ -106,7 +114,7 @@ function App() {
     setCurrentPosition(targetPosition);
     smoothZoom(map, 17, map.getZoom());
     map.panTo(targetPosition);
-  };
+  }
 
   if (loadError) {
     return <div>Error Loading Maps</div>;
@@ -198,7 +206,17 @@ function App() {
             options={customizedOptions}
             onLoad={handleMapLoad}
           >
-            <Marker position={currentPosition} />
+            <Marker position={currentPosition}>
+              {currentPosition === defaultPosition ? null : (
+                <InfoWindow
+                  onCloseClick={() => {
+                    console.log("window closed!");
+                  }}
+                >
+                  <div>test</div>
+                </InfoWindow>
+              )}
+            </Marker>
           </GoogleMap>
         </section>
       </main>
