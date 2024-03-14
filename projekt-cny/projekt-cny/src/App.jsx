@@ -10,6 +10,10 @@ import {
 } from "@react-google-maps/api";
 import "./App.css";
 import mapJson from "./map.json";
+import Header from "./components/Header";
+import SearchContainer from "./components/SearchContainer";
+import TestLocationPanel from "./components/TestLocationPanel";
+import ResultContainer from "./components/ResultContainer";
 
 const mapContainerStyle = {
   width: "100%",
@@ -17,8 +21,8 @@ const mapContainerStyle = {
 };
 
 const defaultPosition = {
-  lat: 25.0374865,
-  lng: 121.5647688,
+  lat: 23.995619518049228,
+  lng: 118.65264039938866,
 };
 
 // 控制地圖內建 UI 顯示
@@ -40,6 +44,7 @@ function App() {
   const mapRef = React.useRef();
   const [map, setMap] = React.useState(null);
   const [currentPosition, setCurrentPosition] = React.useState(defaultPosition);
+  const [isSearching, setIsSearching] = React.useState(false);
   const onLoad = React.useCallback((map) => {
     mapRef.current = map;
   });
@@ -63,8 +68,6 @@ function App() {
   //     }, 80);
   //   }
   // }
-
-  function showAllLocationInList() {}
 
   function smoothZoom(map, targetZoomLevel, currentZoomLevel) {
     if (targetZoomLevel <= currentZoomLevel) {
@@ -95,6 +98,7 @@ function App() {
       smoothZoom(map, 17, map.getZoom());
       map.panTo(userPosition);
     });
+    setIsSearching(true);
   }
 
   function handleTargetLocationClick(e, identifier) {
@@ -109,6 +113,7 @@ function App() {
         };
         targetPosition = targetPositionCoord;
       }
+      setIsSearching(true);
     });
 
     setCurrentPosition(targetPosition);
@@ -126,87 +131,27 @@ function App() {
 
   return (
     <div className="page-wrapper">
-      <header className="header-wrapper">
-        <div className="announcement">
-          <a href="">請支持貓咖，讓貓咖一起變得更好</a>
-        </div>
-        <div className="main-header">
-          <a href="" className="main-logo">
-            貓咖 | Cat Cafe
-          </a>
-          <a href="" className="main-tutorial">
-            第一次找貓咖？
-          </a>
-          <div className="menu-container">
-            <button type="button" className="btn btn-dark btn-lg">
-              註冊
-            </button>
-            <button type="button" className="btn btn-light btn-lg ms-3">
-              登入
-            </button>
-          </div>
-        </div>
-      </header>
-      <main>
-        <section className="user-search-container">
-          <div className="user-search-title-container">
-            <h3>工作 + 吸貓 + 咖啡？</h3>
-            <h4>快來找最適合你的貓咖！</h4>
-            <div className="user-search-input-container">
-              <input type="text" placeholder="輸入縣市、地區或店名" />
-              <span className="material-symbols-outlined"> search </span>
-            </div>
-            <div className="user-search-neighborhood-container">
-              <div className="user-search-neighborhood-container-text-container">
-                <h4>找找附近的貓咖？</h4>
-                <p>需開啟瀏覽器定位權限</p>
-              </div>
-              <button
-                type="button"
-                className="btn btn-light btn-md"
-                onClick={(e) => handleCurrentLocationClick(e)}
-              >
-                立即搜尋
-              </button>
-            </div>
-          </div>
-        </section>
-        <div
-          className="btn-group-vertical"
-          style={{
-            position: "absolute",
-            zIndex: 3,
-            right: "5%",
-          }}
+      <Header />
+      {!isSearching ? (
+        <SearchContainer
+          handleCurrentLocationClick={handleCurrentLocationClick}
+        />
+      ) : (
+        <ResultContainer />
+      )}
+
+      <TestLocationPanel
+        handleTargetLocationClick={handleTargetLocationClick}
+      />
+      <section className="map-container" style={{width: isSearching && '70%', right: isSearching && '0px'}}>
+        <GoogleMap
+          mapContainerStyle={mapContainerStyle}
+          zoom={7}
+          center={currentPosition}
+          options={customizedOptions}
+          onLoad={handleMapLoad}
         >
-          <button
-            className="btn btn-warning btn-lg mt-2"
-            onClick={(e) => handleTargetLocationClick(e, "朵朵嚐嚐")}
-          >
-            <span>朵朵嚐嚐</span>
-          </button>
-          <button
-            className="btn btn-warning btn-lg mt-2"
-            onClick={(e) => handleTargetLocationClick(e, "貓谷")}
-          >
-            <span>貓谷</span>
-          </button>
-          <button
-            className="btn btn-warning btn-lg mt-2"
-            onClick={(e) => handleTargetLocationClick(e, "Toast Chat")}
-          >
-            <span>Toast Chat</span>
-          </button>
-        </div>
-        <section className="map-container">
-          <GoogleMap
-            mapContainerStyle={mapContainerStyle}
-            zoom={7}
-            center={currentPosition}
-            options={customizedOptions}
-            onLoad={handleMapLoad}
-          >
-            <Marker position={currentPosition}>
+          {/* <Marker position={currentPosition}>
               {currentPosition === defaultPosition ? null : (
                 <InfoWindow
                   onCloseClick={() => {
@@ -216,10 +161,9 @@ function App() {
                   <div>test</div>
                 </InfoWindow>
               )}
-            </Marker>
-          </GoogleMap>
-        </section>
-      </main>
+            </Marker> */}
+        </GoogleMap>
+      </section>
     </div>
   );
 }
