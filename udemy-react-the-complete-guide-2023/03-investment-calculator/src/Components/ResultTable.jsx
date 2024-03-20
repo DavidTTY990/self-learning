@@ -2,6 +2,10 @@ import { calculateInvestmentResults } from "../util/investment";
 
 export default function ResultTable({ userInput, formatter }) {
   const resultsData = calculateInvestmentResults(userInput);
+  if (resultsData.length <= 0) {
+    return <p className="center">Duration should be greater than zero</p>;
+  }
+
   const initialInvestment =
     resultsData[0].valueEndOfYear -
     resultsData[0].interest -
