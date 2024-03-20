@@ -29,7 +29,7 @@ export default function ResultTable({ userInput, formatter }) {
             initialInvestment;
           const totalAmountInvested = result.valueEndOfYear - totalInterest;
           return (
-            <tr className="center" key={resultIndex}>
+            <tr className="center" key={result.year}>
               <th>{result.year}</th>
               <td>{formatter.format(result.interest)}</td>
               <td>{formatter.format(result.valueEndOfYear)}</td>
